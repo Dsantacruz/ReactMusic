@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>React Music</title>
+	<link rel="stylesheet" href="https://raw.githubusercontent.com/ockang/cero.css/master/cero.css" />
+	<link rel="stylesheet" href="css/app.css" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+<body>
+
+	<header class="myHeader">
+		<figure class="myHeader__Figure">
+			<img src="https://scontent-gru2-1.xx.fbcdn.net/v/t1.0-1/p160x160/17361784_1447031498682648_1448072562951213379_n.jpg?oh=657c48d7200af6a99e7ef289691fab90&oe=596603CB" alt="edinson carranza saldaña" />
+		</figure>
+		<nav class="myHeader__Nav">
+			<h1>By Edinson Carranza Saldaña</h1>
+		</nav>
+	</header>
+
+	<main id="home"></main>
+
+	<main id="second"></main>	
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.22.1/babel.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	
+	<script type="text/babel">
+		'use strict'
+
+
+		const API = 'http://api.soundcloud.com/';
+		const KEY = 'client_id=58488e8291e78780ccb8309c94df92b5';
+
+		const ARRAYMUSIC = [];
+
+
+		var optionsHome = {
+			'logo': 'img/logo.png'
+		}
+
+		/*const HomeSearch = function(props) {
+
+			let HomeWeb =  <section className="home">
+						  	<figure className="home__Logo">
+							 <img src="img/logo.png" />
+						    </figure>
+							<form className="home__Form" onSubmit={this.buscarMusic}>
+								<input type="text" />
+								<input type="submit" value="BUSCAR" />
+							</form>
+						 </section>
+
+			return (HomeWeb)
+
+		}*/
+
+		class HomeSearch extends React.Component {
+
+
+			buscarMusic(e) {
+				e.preventDefault();
+
+				let find = document.getElementById('getvalue').value;
+
+				var urlsearch = API + "tracks?q=" + find + "&limit=25&"+KEY;
+
+				$.getJSON(urlsearch, done, false);
+
+				function done(data){
+
+					secondFN(data);
+
+				}
+
+
+				console.log(find);
+			}
+
+			render() {
+
+						let HomeWeb =  <section className="home">
+						  	<figure className="home__Logo">
+							 <img src="img/logo.png" />
+						    </figure>
+							<form className="home__Form" onSubmit={this.buscarMusic}>
+								<input type="text" id="getvalue" onChange={this.valueInput}/>
+								<input type="submit" value="BUSCAR" />
+							</form>
+						 </section>
+
+						return (HomeWeb)
+
+			}
+
+
+		}
+
+
+
+		//Render Home Search
+		ReactDOM.render(
+			<HomeSearch logo={optionsHome.logo} />,
+			document.getElementById('home'),
+			() => {
+				console.log('%c estoy usando REACT', 'background: green;color:white');
+			}
+		);
+
+
+
+		function secondFN(data){
+
+			class Artist extends React.Component {
+
+				constructor(props) {
+					super(props);
+				}
+
+				render() {
+
+					console.log(data);
+
+
+					const show = this.props.list.map((e, i, a) => {
+						
+						const play = API+"tracks/"+e.id+"/stream?"+KEY;
+						
+						return <li className="listArtist">
+									<figure className="listArtist__Figure">
+										<img  src={ e.artwork_url || 'img/edinson.jpg'} />
+									</figure>
+									<div className="listArtist__Name">
+										<header className="listArtist__Header">
+											<h3>{e.title}</h3>
+										</header>
+
+										<div class="listArtist__Audio">
+											<audio src={play} controls></audio>
+										</div>
+									</div>
+							   </li>	
+					});
+
+
+					return <ul className="containerList">{show}</ul>
+
+
+
+					
+				}
+
+			}
+
+			//Render Home Success Search
+			ReactDOM.render(
+				<Artist list={data}/>,
+				document.getElementById('second'),
+				() => {
+					console.log('%c Se encontro los artistas', 'background: red,color:white');
+				}
+
+			)
+
+		}
+
+	</script>
+
+</body>
+</html>	

@@ -1,0 +1,79 @@
+body {
+	background: #121314;
+	background-image: url('https://springboard-cdn.appadvice.com/apptributes/110644115139821961010/1461223304523-spotify-background-9102-xl.jpg');
+	background-size: cover;
+	margin:0;
+	font-family: 'Open Sans', sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.home {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	top: 30%;
+	background: rgba(0, 0, 0, 0.8);
+	padding: 0.5em;
+}
+.home .home__Form input[type='text'] {
+	border: 1px solid #88898c;
+	display: block;
+	margin: 0 auto;
+	padding: 0.5em 1em;
+	border-radius: 4px;
+	outline: none;
+	margin-bottom: 0.5em;
+}
+.home .home__Form input[type='text']:hover {
+	border: 1px solid #1ed760;
+}
+.home .home__Form input[type='submit'] {
+	background: #1ed760;
+	padding: 0.5em 1em; 
+	border: none;
+	color: white;
+}
+
+#home {
+	margin-bottom: 35%;
+	transition: all 0.5s linear;
+}
+
+#second {
+	width: 50%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.myHeader {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	background: black;
+	display: flex;
+	color: white;
+}
+.myHeader figure {
+	margin: 0;
+}
+.myHeader img {
+	width: 50%;
+	display: block;
+}
+
+.containerList {
+	background: black;
+}
+.containerList .listArtist {
+	display: flex;
+}
+.containerList .listArtist .listArtist__Header h3 {
+	color: white;
+	white-space: nowrap;
+	width: 50%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
